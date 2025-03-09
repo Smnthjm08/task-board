@@ -6,7 +6,7 @@ import { CardWrapper } from "./card-wrapper";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { useState, useTransition } from "react";
-import { RegisterSchema } from "@/schemas";
+import { RegisterSchema } from "@/schemas/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
