@@ -1,4 +1,4 @@
-import authConfig from './auth.config';
+import authConfig from './config/auth/auth.config';
 
 import NextAuth from 'next-auth';
 import {
@@ -6,7 +6,7 @@ import {
   apiAuthprefix,
   authRoutes,
   publicRoutes,
-} from '@/routes';
+} from '@/config/routes.config';
 
 const { auth } = NextAuth(authConfig);
 

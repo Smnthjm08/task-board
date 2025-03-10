@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable react/no-children-prop */
 'use client';
 
 import { CardWrapper } from './card-wrapper';
@@ -8,11 +6,10 @@ import * as z from 'zod';
 import { useState, useTransition } from 'react';
 import { LoginSchema } from '@/schemas/auth.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -21,8 +18,8 @@ import {
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { FormError } from '../form-error';
-import { FormSuccess } from '../form-success';
 import { login } from '@/actions/login';
+import { toast } from 'sonner';
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();
@@ -34,6 +31,7 @@ export const LoginForm = () => {
   const [error, setError] = useState<string | undefined>('');
   const [success, setSuccess] = useState<string | undefined>('');
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -48,11 +46,21 @@ export const LoginForm = () => {
     setSuccess('');
 
     startTransition(() => {
-      login(values).then((data) => {
-        setError(data?.error);
-        // need to be fixed
-        setSuccess(data?.success);
-      });
+      login(values).then(
+        (data: { error?: string; success?: string } | undefined): void => {
+          if (data?.error) {
+            setError(data.error);
+            toast.error(data.error);
+          }
+
+          if (data?.success) {
+            setSuccess(data.success);
+            
+            router.push("")
+            toast.success(data.success);
+          }
+        }
+      );
     });
   };
 
@@ -105,7 +113,6 @@ export const LoginForm = () => {
           </div>
 
           <FormError message={error || urlError} />
-          <FormSuccess message={success} />
           <Button disabled={isPending} type='submit' className='w-full'>
             Login
           </Button>

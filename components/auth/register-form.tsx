@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable react/no-children-prop */
 'use client';
 
 import { CardWrapper } from './card-wrapper';
@@ -11,7 +9,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -22,11 +19,14 @@ import { Button } from '../ui/button';
 import { FormError } from '../form-error';
 import { FormSuccess } from '../form-success';
 import { register } from '@/actions/register';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>('');
   const [success, setSuccess] = useState<string | undefined>('');
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -45,6 +45,10 @@ export const RegisterForm = () => {
       register(values).then((data) => {
         setError(data.error);
         setSuccess(data.success);
+        if(data.success){
+          toast("Registration Successfully, Please login to continue.")
+          router.push("/auth/login");
+        }
       });
     });
   };
@@ -115,7 +119,6 @@ export const RegisterForm = () => {
           </div>
 
           <FormError message={error} />
-          <FormSuccess message={success} />
           <Button disabled={isPending} type='submit' className='w-full'>
             Create an account
           </Button>

@@ -15,3 +15,5 @@ export const apiAuthprefix = '/api/auth';
 //default redirect path after logging in
 
 export const DEFAULT_LOGIN_REDIRECT = '/dashboard';
+
+export const ORGANIZATION_SETUP_ROUTE = '/setup-org';
