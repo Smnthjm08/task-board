@@ -1,22 +1,22 @@
-import type { NextAuthConfig } from "next-auth";
-import Credentials from "next-auth/providers/credentials";
-import Github from "next-auth/providers/github";
-import Google  from "next-auth/providers/google";
+import type { NextAuthConfig } from 'next-auth';
+import Credentials from 'next-auth/providers/credentials';
+import Github from 'next-auth/providers/github';
+import Google from 'next-auth/providers/google';
 
-import { LoginSchema } from "./schemas/auth.schema";
-import { getUserByEmail } from "./data/user";
-import bcrypt from "bcryptjs";
+import { LoginSchema } from './schemas/auth.schema';
+import { getUserByEmail } from './data/user';
+import bcrypt from 'bcryptjs';
 
 // Notice this is only an object, not a full Auth.js instance
 export default {
   providers: [
-    Github ({
+    Github({
       clientId: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
-    Google ({
+    Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
     Credentials({
       async authorize(credentials) {

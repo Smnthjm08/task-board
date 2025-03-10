@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-"use client";
+'use client';
 
 import {
   Card,
@@ -8,10 +8,10 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Header } from "./header";
-import { Social } from "./social";
-import { BackButton } from "./back-button";
+} from '@/components/ui/card';
+import { Header } from './header';
+import { Social } from './social';
+import { BackButton } from './back-button';
 
 interface CardWrapperProps {
   children: React.ReactNode;
@@ -29,14 +29,14 @@ export const CardWrapper = ({
   showSocial,
 }: CardWrapperProps) => {
   return (
-    <Card className="w-[400px] shadow-md">
+    <Card className='w-[400px] shadow-md'>
       <CardHeader>
         <Header label={headerLabel} />
       </CardHeader>
       <CardContent>{children}</CardContent>
       {showSocial && (
         <CardFooter>
-            <Social />
+          <Social />
         </CardFooter>
       )}
       <CardFooter>
