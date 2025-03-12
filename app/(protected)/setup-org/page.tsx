@@ -1,16 +1,23 @@
 import { auth } from '@/auth';
 import { db } from '@/lib/db';
+import test from 'node:test';
 
 export default async function SetupOrganization() {
-    const session = await auth();
+  const session = await auth();
 
-  const org = await db.organization.findFirst({
-    where: {
-      ownerId: session?.user?.id,
-    },
-  });
+  if (!session) {
+    return <p>Loading...</p>;
+  }
 
-  console.log('user org data', org);
+  if (session) {
+    const test = await db.organization.findFirst({
+      where: {
+        ownerId: session?.user?.id,
+      },
+    });
+  }
+
+  console.log('user org data', test);
   return (
     <main>
       <div>nfsvefndk</div>

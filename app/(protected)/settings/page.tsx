@@ -4,9 +4,13 @@ import { Button } from '@/components/ui/button';
 const SettingsPage = async () => {
   const session = await auth();
 
+  if (!session) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <div>
-      {JSON.stringify(session)}
+      <pre>{JSON.stringify(session, null, 2)}</pre>
       <form
         action={async () => {
           'use server';

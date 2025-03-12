@@ -21,6 +21,7 @@ import { FormSuccess } from '../form-success';
 import { register } from '@/actions/register';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { DEFAULT_REGISTER_REDIRECT } from '@/config/routes.config';
 
 export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>('');
@@ -47,7 +48,7 @@ export const RegisterForm = () => {
         setSuccess(data.success);
         if(data.success){
           toast("Registration Successfully, Please login to continue.")
-          router.push("/auth/login");
+          router.push(DEFAULT_REGISTER_REDIRECT);
         }
       });
     });

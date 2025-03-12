@@ -16,4 +16,4 @@ export const apiAuthprefix = '/api/auth';
 
 export const DEFAULT_LOGIN_REDIRECT = '/dashboard';
 
-export const ORGANIZATION_SETUP_ROUTE = '/setup-org';
+export const DEFAULT_REGISTER_REDIRECT = '/setup-org';
