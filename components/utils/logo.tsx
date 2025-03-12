@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import localFont from 'next/font/local';
 
-const headingFont = localFont({ src: '../public/fonts/font.woff2' });
+const headingFont = localFont({ src: '../../public/fonts/font.woff2' });
 
 const Logo = () => {
   return (

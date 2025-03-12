@@ -1,4 +1,4 @@
-import Logo from '../logo';
+import Logo from '../utils/logo';
 import { Button } from '../ui/button';
 
 export const Footer = () => {

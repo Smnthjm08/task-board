@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Logo from '../logo';
+import Logo from '../utils/logo';
 import { Button } from '../ui/button';
 // import { ThemeToggle } from "./theme-toogle";
 

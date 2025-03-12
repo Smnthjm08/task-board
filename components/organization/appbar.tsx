@@ -1,4 +1,4 @@
-import Logo from '../logo';
+import Logo from '../utils/logo';
 
 export default function Appbar() {
   return (
