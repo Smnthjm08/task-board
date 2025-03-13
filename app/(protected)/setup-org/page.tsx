@@ -1,26 +1,9 @@
-import { auth } from '@/auth';
-import { db } from '@/lib/db';
-import test from 'node:test';
+import SetupOrganization from '@/components/organization/setup-org-card';
 
-export default async function SetupOrganization() {
-  const session = await auth();
-
-  if (!session) {
-    return <p>Loading...</p>;
-  }
-
-  if (session) {
-    const test = await db.organization.findFirst({
-      where: {
-        ownerId: session?.user?.id,
-      },
-    });
-  }
-
-  console.log('user org data', test);
+export default function SetupOrganizationPage() {
   return (
-    <main>
-      <div>nfsvefndk</div>
+    <main className='flex min-h-screen items-center justify-center'>
+      <SetupOrganization />
     </main>
   );
 }
