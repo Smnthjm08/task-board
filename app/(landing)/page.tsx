@@ -5,6 +5,7 @@ import { Medal } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { auth } from '@/auth';
 
 const headingFont = localFont({ src: '../../public/fonts/font.woff2' });
 
@@ -13,7 +14,10 @@ const textFont = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 });
 
-export default function MainPage() {
+export default async function MainPage() {
+  const session = await auth();
+  if(!session){
+
   return (
     <div className='flex flex-col items-center justify-center'>
       <div
@@ -49,3 +53,10 @@ export default function MainPage() {
     </div>
   );
 }
+if(session){
+  <div>
+    <div>user: {JSON.stringify(session)}</div>
+  </div>
+}
+}
+

@@ -1,7 +1,6 @@
 'use client';
 
-import type React from 'react';
-
+import React from 'react';
 import { useState, useRef } from 'react';
 import { Upload, X } from 'lucide-react';
 import Image from 'next/image';
@@ -78,7 +77,6 @@ export default function SetupOrganization() {
       </CardHeader>
       <form onSubmit={handleSubmit}>
         <CardContent className='space-y-6'>
-          {/* Logo Upload */}
           <div className='space-y-2'>
             <Label>Organization Logo</Label>
             <div className='flex flex-col items-center justify-center'>
@@ -126,7 +124,6 @@ export default function SetupOrganization() {
             </div>
           </div>
 
-          {/* Organization Name */}
           <div className='space-y-2'>
             <Label htmlFor='org-name'>Organization Name</Label>
             <Input
@@ -138,7 +135,6 @@ export default function SetupOrganization() {
             />
           </div>
 
-          {/* Organization Slug */}
           <div className='space-y-2'>
             <Label htmlFor='org-slug'>Organization Slug</Label>
             <Input

@@ -50,6 +50,7 @@ model Account {
 model Organization {
   id        String               @id @default(cuid())
   name      String
+  slug      String?              @unique
   ownerId   String               @map("owner_id")
   owner     User                 @relation("OrganizationOwner", fields: [ownerId], references: [id], onDelete: Cascade)
   members   OrganizationMember[]
