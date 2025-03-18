@@ -1,12 +1,7 @@
-import { AppBar } from '@/components/organization/appbar';
 import React from 'react';
 
 const SettingsPage = () => {
-  return (
-    <div>
-      <AppBar />
-    </div>
-  );
+  return <div>Hello</div>;
 };
 
 export default SettingsPage;

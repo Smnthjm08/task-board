@@ -62,9 +62,7 @@ export default function SetupOrganization() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
     console.log({ orgName, slug, logoPreview });
-    // You would typically send this data to your backend
   };
 
   return (

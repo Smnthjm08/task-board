@@ -55,8 +55,8 @@ export const LoginForm = () => {
 
           if (data?.success) {
             setSuccess(data.success);
-            
-            router.push("")
+
+            router.push('');
             toast.success(data.success);
           }
         }
