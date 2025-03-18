@@ -14,6 +14,6 @@ export const apiAuthprefix = '/api/auth';
 
 //default redirect path after logging in
 
-export const DEFAULT_LOGIN_REDIRECT = '/settings';
+export const DEFAULT_LOGIN_REDIRECT = '/';
 
-export const DEFAULT_REGISTER_REDIRECT = '/setup-org';
+export const DEFAULT_REGISTER_REDIRECT = '/setup-organization';

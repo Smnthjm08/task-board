@@ -8,7 +8,6 @@ import { useSession } from 'next-auth/react';
 
 export const NavBar = () => {
   const { data: session } = useSession();
-  console.log('======', session);
 
   return (
     <div className='fixed top-0 flex h-14 w-full items-center border-b px-8 shadow-sm'>
