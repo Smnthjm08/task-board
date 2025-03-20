@@ -18,7 +18,7 @@ import {
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { FormError } from '../form-error';
-import { login } from '@/actions/login';
+import { login } from '@/actions/auth/login';
 import { toast } from 'sonner';
 
 export const LoginForm = () => {

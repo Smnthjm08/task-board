@@ -1,13 +1,17 @@
+'use client';
+import OrganisationContext from '@/context/org-context';
 import { db } from '@/lib/db';
+import { useContext } from 'react';
 
-export default async function OrganizationPage() {
-  const organization = await db.organization.findUnique({
-    where: { id: 'cm83d38ik0000tvwpqdd67io3' },
-  });
-  console.log('-=---', organization);
+export default function OrganizationPage() {
+  const organisation = useContext(OrganisationContext);
+  console.log('organisation data', organisation);
+
+  if (!organisation) return <div>Loading org data...</div>;
+
   return (
     <div>
-      <div>Organization Page</div>
+      <div>Organization Page - {organisation?.organisation?.id}</div>
     </div>
   );
 }

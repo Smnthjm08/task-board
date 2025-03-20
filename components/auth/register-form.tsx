@@ -17,7 +17,7 @@ import {
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { FormError } from '../form-error';
-import { register } from '@/actions/register';
+import { register } from '@/actions/auth/register';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 

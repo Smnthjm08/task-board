@@ -6,8 +6,9 @@ import { siteConfig } from '@/config/site.config';
 import { Toaster } from '@/components/ui/sonner';
 import { SessionProvider } from 'next-auth/react';
 import { NavBar } from '@/components/global/navbar';
-import getUserWithOrganization from '@/actions/get-user-org';
+import getUserOrganisation from '@/actions/organisation/get-organisation';
 import RedirectHandler from '@/components/global/redirect-handler';
+import { OrganisationProvider } from '@/context/org-context';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -36,25 +37,28 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = await getUserWithOrganization();
-  const shouldRedirect = !!(user && user.organizations.length === 0);
+  const organisation = await getUserOrganisation();
+
+  const shouldRedirect = !!(organisation && organisation?.id === null);
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang='en' suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
+          attribute='class'
+          defaultTheme='system'
           enableSystem
           disableTransitionOnChange
         >
           <SessionProvider>
-            <NavBar />
-            {/* Client-side redirect handling */}
-            <RedirectHandler shouldRedirect={shouldRedirect} />
-            {children}
+            <OrganisationProvider>
+              <NavBar />
+              {/* Client-side redirect handling */}
+              <RedirectHandler shouldRedirect={shouldRedirect} />
+              {children}
+            </OrganisationProvider>
           </SessionProvider>
           <Toaster />
         </ThemeProvider>

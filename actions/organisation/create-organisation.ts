@@ -1,6 +1,6 @@
 'use server';
 
-export const createOrganization = () => {
+export const createOrganisation = () => {
   try {
     
   } catch (error) {
