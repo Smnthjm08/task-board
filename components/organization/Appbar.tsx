@@ -1,6 +1,6 @@
 import { Plus } from 'lucide-react';
 import Logo from '../utils/logo';
-import {Button} from "../../components/ui/button"
+import { Button } from '../../components/ui/button';
 import { ThemeToggle } from '../global/theme-toogle';
 import React from 'react';
 

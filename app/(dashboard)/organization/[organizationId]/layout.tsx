@@ -1,4 +1,4 @@
-import { OrgControl } from "@/components/organization/org-control";
+import { OrgControl } from '@/components/organization/org-control';
 
 const OrganizationIdLayout = ({ children }: { children: React.ReactNode }) => {
   return (

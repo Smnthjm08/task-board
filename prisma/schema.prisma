@@ -49,6 +49,7 @@ model Account {
 
 model Organization {
   id        String               @id @default(cuid())
+  logo      String?
   name      String
   slug      String?              @unique
   ownerId   String               @map("owner_id")

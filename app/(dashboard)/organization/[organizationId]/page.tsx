@@ -1,17 +1,16 @@
 'use client';
-import OrganisationContext from '@/context/org-context';
-import { db } from '@/lib/db';
-import { useContext } from 'react';
+import useOrganization from '@/hooks/use-organization';
 
 export default function OrganizationPage() {
-  const organisation = useContext(OrganisationContext);
-  console.log('organisation data', organisation);
+  const { organization, isOwner } = useOrganization();
+  console.log('organization data', organization);
 
-  if (!organisation) return <div>Loading org data...</div>;
+  if (!organization?.id) return <div>Loading org data...</div>;
 
   return (
     <div>
-      <div>Organization Page - {organisation?.organisation?.id}</div>
+      <div>Organization Page - {organization.id}</div>
+      {isOwner && <div>You are the owner of this organization</div>}
     </div>
   );
 }

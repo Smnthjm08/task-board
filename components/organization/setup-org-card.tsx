@@ -16,16 +16,19 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { createOrganization } from '@/actions/organization/create-organization';
 
 export default function SetupOrganization() {
-  const [orgName, setOrgName] = useState('');
+  const [name, setName] = useState('');
   const [slug, setSlug] = useState('');
-  const [logoPreview, setLogoPreview] = useState<string | null>(null);
+  const [logo, setLogo] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleOrgNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.value;
-    setOrgName(name);
+    setName(name);
 
     // Generate slug from organization name
     const generatedSlug = name
@@ -47,22 +50,42 @@ export default function SetupOrganization() {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setLogoPreview(e.target?.result as string);
+        setLogo(e.target?.result as string);
       };
       reader.readAsDataURL(file);
     }
   };
 
   const removeLogo = () => {
-    setLogoPreview(null);
+    setLogo(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ orgName, slug, logoPreview });
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      const result = await createOrganization({
+        name,
+        slug,
+        logo: logo || undefined,
+      });
+
+      if (result?.error) {
+        setError(result.error);
+      } else {
+        // window.location.href = `/organizations/${slug}`;
+        // window.location.href = `/`;
+      }
+    } catch (err) {
+      setError('Failed to create organization. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -78,10 +101,10 @@ export default function SetupOrganization() {
           <div className='space-y-2'>
             <Label>Organization Logo</Label>
             <div className='flex flex-col items-center justify-center'>
-              {logoPreview ? (
+              {logo ? (
                 <div className='relative mb-2 h-24 w-24'>
                   <Image
-                    src={logoPreview || '/placeholder.svg'}
+                    src={logo || '/placeholder.svg'}
                     alt='Organization logo'
                     fill
                     className='rounded-md object-cover'
@@ -117,7 +140,7 @@ export default function SetupOrganization() {
                 size='sm'
                 onClick={() => fileInputRef.current?.click()}
               >
-                {logoPreview ? 'Change Logo' : 'Upload Logo'}
+                {logo ? 'Change Logo' : 'Upload Logo'}
               </Button>
             </div>
           </div>
@@ -127,8 +150,8 @@ export default function SetupOrganization() {
             <Input
               id='org-name'
               placeholder='Acme Inc.'
-              value={orgName}
-              onChange={handleOrgNameChange}
+              value={name}
+              onChange={handleNameChange}
               required
             />
           </div>
@@ -149,10 +172,14 @@ export default function SetupOrganization() {
               </p>
             )}
           </div>
+
+          {error && (
+            <p className='text-sm font-medium text-destructive'>{error}</p>
+          )}
         </CardContent>
         <CardFooter>
-          <Button type='submit' className='w-full'>
-            Create Organization
+          <Button type='submit' className='w-full' disabled={isSubmitting}>
+            {isSubmitting ? 'Creating...' : 'Create Organization'}
           </Button>
         </CardFooter>
       </form>

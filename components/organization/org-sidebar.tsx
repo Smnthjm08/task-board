@@ -21,7 +21,7 @@ export default function OrganizationSidebar({
     storageKey,
     {}
   );
-//   const {organization} = useContext(organizationContext)
+  //   const {organization} = useContext(organizationContext)
 
   return (
     <div>

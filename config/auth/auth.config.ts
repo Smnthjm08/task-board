@@ -4,7 +4,7 @@ import Github from 'next-auth/providers/github';
 import Google from 'next-auth/providers/google';
 
 import { LoginSchema } from '../../schemas/auth.schema';
-import { getUserByEmail } from '../../data/user';
+import { getUserByEmail } from '@/actions/user';
 import bcrypt from 'bcryptjs';
 
 // Notice this is only an object, not a full Auth.js instance

@@ -6,9 +6,9 @@ import { siteConfig } from '@/config/site.config';
 import { Toaster } from '@/components/ui/sonner';
 import { SessionProvider } from 'next-auth/react';
 import { NavBar } from '@/components/global/navbar';
-import getUserOrganisation from '@/actions/organisation/get-organisation';
+import getUserOrganization from '@/actions/organization/get-organization';
 import RedirectHandler from '@/components/global/redirect-handler';
-import { OrganisationProvider } from '@/context/org-context';
+import { OrganizationProvider } from '@/context/org-context';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -37,9 +37,9 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const organisation = await getUserOrganisation();
+  const organization = await getUserOrganization();
 
-  const shouldRedirect = !!(organisation && organisation?.id === null);
+  const shouldRedirect = !!(organization && organization?.id === null);
 
   return (
     <html lang='en' suppressHydrationWarning>
@@ -53,12 +53,12 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <SessionProvider>
-            <OrganisationProvider>
+            <OrganizationProvider>
               <NavBar />
               {/* Client-side redirect handling */}
               <RedirectHandler shouldRedirect={shouldRedirect} />
               {children}
-            </OrganisationProvider>
+            </OrganizationProvider>
           </SessionProvider>
           <Toaster />
         </ThemeProvider>
