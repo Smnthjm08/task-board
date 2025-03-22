@@ -25,6 +25,7 @@ export async function createOrganization(data: OrganizationData) {
       throw new Error('Organization with this slug already exists.');
     }
     if (!session?.user?.id) return null;
+    
     const organization = await db.organization.create({
       data: {
         name: data.name,

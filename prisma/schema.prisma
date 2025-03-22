@@ -20,15 +20,17 @@ enum Subscription {
 }
 
 model User {
-  id                      String               @id @default(cuid())
-  name                    String?
-  email                   String?              @unique
-  emailVerified           DateTime?            @map("email_verified")
-  image                   String?
-  password                String?
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime? @map("email_verified")
+  image         String?
+  password      String?
+
   accounts                Account[]
-  organizations           Organization[]       @relation("OrganizationOwner") // Organizations the user owns
-  organizationMemberships OrganizationMember[] // Organizations the user is a member of
+  organizations           Organization[]       @relation("OrganizationOwner")
+  organizationMemberships OrganizationMember[]
+  board                   Board[]
 
   @@map("users")
 }
@@ -54,15 +56,17 @@ model Account {
 }
 
 model Organization {
-  id           String               @id @default(cuid())
+  id           String       @id @default(cuid())
   logo         String?
   name         String
-  slug         String?              @unique
-  subscription Subscription         @default(FREE)
-  ownerId      String               @map("owner_id")
-  owner        User                 @relation("OrganizationOwner", fields: [ownerId], references: [id], onDelete: Cascade)
-  members      OrganizationMember[]
-  companies    Company[]
+  slug         String?      @unique
+  subscription Subscription @default(FREE)
+  ownerId      String       @map("owner_id")
+  owner        User         @relation("OrganizationOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+
+  members   OrganizationMember[]
+  companies Company[]
+  board     Board[]
 
   @@map("organizations")
 }
@@ -85,4 +89,17 @@ model Company {
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 
   @@map("companies")
+}
+
+model Board {
+  id             String  @id @default(uuid())
+  title          String
+  userId         String
+  organizationId String?
+
+  createdBy    User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

@@ -5,6 +5,7 @@ import { db } from '@/lib/db';
 
 export default async function getUserOrganization() {
   const session = await auth();
+  console.log("======\n", session)
 
   if (!session?.user?.id) return null;
 

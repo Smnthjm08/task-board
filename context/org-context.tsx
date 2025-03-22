@@ -34,10 +34,6 @@ export const OrganizationProvider = ({
 
       if (!organizationData?.id) {
         router.push('/setup-organization');
-      }
-
-      if (!organizationData) {
-        router.push('/setup-organization');
       } else {
         setOrganization({
           id: organizationData.id ?? '',

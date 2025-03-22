@@ -18,6 +18,10 @@ import OrganizationContext from '@/context/org-context';
 
 export default function UserAvatar() {
   const { organization } = useContext(OrganizationContext);
+  
+  console.log("organization", organization);
+
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
