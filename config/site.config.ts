@@ -1,4 +1,4 @@
 export const siteConfig = {
-  name: 'Taskify',
+  name: 'TaskBoard',
   description: 'Collabrate, manage projects, and reach new productivity peaks',
 };

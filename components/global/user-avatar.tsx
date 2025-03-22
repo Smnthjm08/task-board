@@ -12,8 +12,12 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { signOut } from 'next-auth/react';
+import Link from 'next/link';
+import { useContext } from 'react';
+import OrganizationContext from '@/context/org-context';
 
 export default function UserAvatar() {
+  const { organization } = useContext(OrganizationContext);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -28,7 +32,11 @@ export default function UserAvatar() {
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <Users className='mr-2 h-4 w-4' />
-            <span>My Organization</span>
+            <span>
+              <Link href={`/organization/${organization?.id}`}>
+                My Organization
+              </Link>
+            </span>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Settings className='mr-2 h-4 w-4' />

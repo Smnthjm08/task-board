@@ -30,7 +30,7 @@ export default async function MainPage() {
             No 1 task management
           </div>
           <h1 className='mb-6 text-center text-3xl text-slate-300 md:text-6xl'>
-            Taskify helps team move
+            TaskBoard helps team move
           </h1>
           <div className='w-fit rounded-md bg-gradient-to-r from-fuchsia-600 to-pink-600 p-2 px-4 pb-4 text-3xl text-white md:text-6xl'>
             work forward.
@@ -44,10 +44,10 @@ export default async function MainPage() {
         >
           Collabrate, manage projects, and reach new productivity peaks. From
           high rises to the home office, the way your team works is unique -
-          accomplish it all with Taskify.
+          accomplish it all with TaskBoard.
         </div>
         <Button>
-          <Link href={'/auth/register'}>Get Taskify for free</Link>
+          <Link href={'/auth/register'}>Get TaskBoard for free</Link>
         </Button>
       </div>
     );

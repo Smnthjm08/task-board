@@ -11,7 +11,7 @@ const Logo = () => {
       {/* <div className='items-center gap-x-2 transition hover:opacity-75 md:flex'> */}
       <div className='hidden items-center gap-x-2 transition hover:opacity-75 md:flex'>
         <Image src='/logo.svg' alt='logo' height={30} width={30} />
-        <p className={cn('pb-1 text-lg', headingFont.className)}>Taskify</p>
+        <p className={cn('pb-1 text-lg', headingFont.className)}>TaskBoard</p>
       </div>
     </Link>
   );

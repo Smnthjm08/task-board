@@ -10,7 +10,7 @@ export default async function getUserOrganization() {
 
   const organization = await db.organization.findFirst({
     where: { members: { some: { userId: session?.user?.id } } },
-    select: { id: true, name: true, ownerId: true },
+    select: { id: true, name: true, ownerId: true, logo: true },
   });
 
   return { ...organization, userId: session.user.id };

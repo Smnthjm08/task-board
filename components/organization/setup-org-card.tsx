@@ -79,7 +79,7 @@ export default function SetupOrganization() {
         setError(result.error);
       } else {
         // window.location.href = `/organizations/${slug}`;
-        // window.location.href = `/`;
+        window.location.href = `/`;
       }
     } catch (err) {
       setError('Failed to create organization. Please try again.');

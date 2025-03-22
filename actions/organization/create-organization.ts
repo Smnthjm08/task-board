@@ -17,6 +17,13 @@ export async function createOrganization(data: OrganizationData) {
   }
 
   try {
+    const existingOrg = await db.organization.findUnique({
+      where: { slug: data.slug },
+    });
+
+    if (existingOrg) {
+      throw new Error('Organization with this slug already exists.');
+    }
     if (!session?.user?.id) return null;
     const organization = await db.organization.create({
       data: {

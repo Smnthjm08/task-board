@@ -3,23 +3,19 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import getUserWithOrganization from '@/actions/organization/get-organization';
+import { OrganizationContextTypes } from '@/types/types';
 
-interface OrganizationContextTypes {
-  id: string;
-  name: string;
-  ownerId: string;
-  userId: string;
-}
-
-interface OrganizationContextValue {
+export interface OrganizationContextValue {
   organization: OrganizationContextTypes | undefined;
   setOrganization: (org: OrganizationContextTypes | undefined) => void;
   isOwner: boolean;
 }
 
-const OrganizationContext = createContext<OrganizationContextValue | undefined>(
-  undefined
-);
+const OrganizationContext = createContext<OrganizationContextValue>({
+  organization: undefined,
+  setOrganization: () => {},
+  isOwner: false,
+});
 
 export const OrganizationProvider = ({
   children,
@@ -48,6 +44,7 @@ export const OrganizationProvider = ({
           name: organizationData.name ?? '',
           ownerId: organizationData.ownerId ?? '',
           userId: organizationData.userId ?? '',
+          subscription: organization?.subscription ?? 'FREE',
         });
 
         setIsOwner(organizationData.ownerId === organizationData.userId);
@@ -55,11 +52,7 @@ export const OrganizationProvider = ({
     };
 
     fetchOrganization();
-  }, [router]);
-
-  useEffect(() => {
-    console.log('Updated Organization:', organization);
-  }, [organization, isOwner]);
+  }, []);
 
   return (
     <OrganizationContext.Provider
